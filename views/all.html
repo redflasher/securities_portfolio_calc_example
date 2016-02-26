@@ -1,0 +1,36 @@
+<table class="table">
+<thead>
+	<th>Наименование</th>
+	<th>Средняя цена</th>
+	<th>Кол-во</th>
+	<th width="20%">Тек.цена</th>
+	<th>Доход/Убыток</th>
+</thead>
+
+	<tr ng-repeat="(name,stock) in stocks track by $index" ng-class="stock.isProfitClass">
+
+		<td>{{stock.name}}</td>
+		<td>{{stock.averagePrice | currency}}</td>
+		<td>{{stock.amount}}</td>
+		<td>
+
+			<div ng-hide="stock.isSetCurPrice">
+			<button ng-hide="stock.isEdit" ng-click="switchCurPriceBtn(name)" class="btn btn-default" type="button">Задать цену</button>
+			</div>
+			
+			<div ng-show="stock.isSetCurPrice">
+				<div ng-hide="stock.isEdit" ng-click="switchCurPriceBtn(name)" title="Кликните для изменения цены" >{{stock.currentPrice | currency}}</div>
+			</div>
+
+            <div ng-show="stock.isEdit" class="input-group input-group-sm">
+	            <input type="number" class="form-control" placeholder="Цена" ng-model="stock.currentPrice">
+	            <span class="input-group-btn">
+	              <button class="btn btn-default" ng-click="switchCurPriceBtn(name)" type="button">Ok</button>
+	            </span>
+	        </div>
+
+
+		</td>
+		<td>{{stock.profit | currency}}</td>
+	</tr>
+</table>

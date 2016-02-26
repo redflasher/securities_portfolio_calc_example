@@ -1,0 +1,57 @@
+<table class="table">
+	<tr>
+		<td>
+			Всего бумаг: 
+		</td>
+		<td>{{getTotalStocks()}}</td>
+	</tr>
+		<td>
+			Прибыльных: 
+		</td>
+		<td>{{getTotalProfitStocks()}}</td>
+	</tr>
+
+	</tr>
+		<td>
+			Убыточных: 
+		</td>
+		<td>{{getTotalNonProfitStocks()}}</td>
+	</tr>
+
+
+	</tr>
+		<td>
+			Доход/Убыток: 
+		</td>
+		<td>{{getTotalProfit() | currency}}</td>
+	</tr>
+
+
+	</tr>
+		<td>
+			Текущая цена портфеля: 
+		</td>
+		<td>{{getTotalCost() | currency}}</td>
+	</tr>
+
+
+</table>
+
+<h1>Распределение стоимости портфеля</h1>
+
+<table class="table">
+	<thead>
+		<th>Наименование</th>
+		<th>Процент от стоимости портфеля</th>
+		<th>Стоимость</th>
+		<th>Доход/Убыток</th>
+	</thead>
+	<tbody>
+		<tr ng-repeat="(name,stock) in stocks | summaryFilter | orderBy:descFn()">
+			<td>{{stock.name}}</td>
+			<td>{{stock.percent | number:2}}</td>
+			<td>{{stock.totalCost | currency}}</td>
+			<td>{{stock.totalProfit | currency}}</td>
+		</tr>
+	</tbody>
+</table>
